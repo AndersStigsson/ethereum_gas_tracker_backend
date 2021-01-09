@@ -2,26 +2,27 @@
 
 providers=$1
 provider=$2
+apikeylist=config/providers_apikey.json
 
 # check required parameters
 if [[ -z $providers ]] || [[ -z $provider ]]
-  then
-    echo '{"error": "missing required paramters"}'
-    exit 1
+    then
+        echo '{"error": "missing required paramters"}'
+        exit 1
 fi
 
 # check if required packages installed (jo,jq,bc)
 if [[ "$(which jo)" == "" ]] || [[ "$(which jq)" == "" ]] || [[ "$(which bc)" == "" ]] || [[ "$(which curl)" == "" ]]
-  then
-    echo '{"error": "missing required packages"}'
-    exit 1
+    then
+        echo '{"error": "missing required packages"}'
+        exit 1
 fi
 
 # check if provider exists
 if [[ "$(jq -r ". | .$provider? | .name " $providers)" != "$provider" ]]
-  then
-    jo error="provider does not exists" | jq --slurp 'reduce .[] as $item ({}; . * $item)'
-    exit 1
+    then
+        jo error="provider does not exists" | jq --slurp 'reduce .[] as $item ({}; . * $item)'
+        exit 1
 fi
 
 # get api information
@@ -36,9 +37,14 @@ apiDivider=$(jq -r ".$provider.divider" $providers)
 
 # stop if apikey needed
 if [[ $apiKey == true ]]
-  then
-    jo error="sorry apikey not yet implemented" | jq --slurp 'reduce .[] as $item ({}; . * $item)'
-    exit 1
+    then
+        if [[ ! -a $apikeylist ]]
+            then
+                jo error="sorry apikey not found" | jq --slurp 'reduce .[] as $item ({}; . * $item)'
+                exit 1
+        fi
+        apiKey=$(jq -r ".$apiName" $apikeylist)
+        apiURL=$(echo $apiURL$apiKey)
 fi
 
 # fetch api data
