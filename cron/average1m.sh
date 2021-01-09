@@ -42,7 +42,10 @@ for provider in $providers
                         jFast=$(jq -r '.fast' <<< $data)
                         fast=$(echo "($fast + $jFast)/$i" | bc -q)
                         jInstant=$(jq -r '.instant' <<< $data)
-                        instant=$(echo "($instant + $jInstant)/$i" | bc -q)
+                        if [[ $jInstant > 0 ]]
+			                then
+                                instant=$(echo "($instant + $jInstant)/$i" | bc -q)
+			            fi
                         i=2
                         ((count+=1))
                 fi
