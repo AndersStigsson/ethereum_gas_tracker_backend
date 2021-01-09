@@ -40,10 +40,15 @@ if [[ $apiKey == true ]]
     then
         if [[ ! -a $apikeylist ]]
             then
-                jo error="sorry apikey not found"
+                jo error="sorry apikey json not found"
                 exit 1
         fi
         apiKey=$(jq -r ".$apiName" $apikeylist)
+        if [[ -z $apiKey ]]
+            then
+                jo error="sorry could not find apikey for provider $apiName"
+                exit 1
+        fi
         apiURL=$(echo $apiURL$apiKey)
 fi
 
