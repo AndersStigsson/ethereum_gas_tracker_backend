@@ -21,6 +21,10 @@ router.get('/providers', function(req, res) {
     res.json(providers);
 });
 
+router.get('/', function(req, res) {
+    res.text("Backend works");
+});
+
 router.get('/gas/avg', function(req,res){
 	
 });
