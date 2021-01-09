@@ -21,9 +21,9 @@ var defaultMessaging = admin.messaging();
 //     res.json(providers);
 // });
 router.get('/providers', function(req, res) {
-  const data = fs.readFileSync('./config/providers.json', {encoding:'utf8', flag:'r'});
-  const providers = JSON.parse(data);
-  res.json(providers);
+    const data = fs.readFileSync('./config/providers.json', {encoding:'utf8', flag:'r'});
+    const providerList = JSON.parse(data);
+    res.json({providers: Object.keys(providerList)});
 });
 
 router.get('/', function(req, res) {
