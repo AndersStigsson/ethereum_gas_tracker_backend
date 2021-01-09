@@ -48,14 +48,18 @@ router.get('/gas/avg/1h', function(req, res){
 
 router.get('/gas/:provider', function(req, res) {
     const provider = req.params.provider;
-    const providers = JSON.parse(fs.readFileSync('./config/providers.json', {encoding:'utf8', flag:'r'}));
-    if(providers.provider === undefined) {
+    const providers = fs.readFileSync('./config/providers.json', {encoding:'utf8', flag:'r'});
+    var providerJSON = JSON.parse(providers); 
+
+    if(providerJSON[provider] === undefined) {
       res.json({error: "Provider does not exist or has not been implemented yet"});
+    } else {
+      var data = fs.readFileSync(`./data/${provider}.json`, {encoding:'utf8', flag:'r'});
+      data = JSON.parse(data);
+      res.json(data);
     }
     
-    const data = fs.readFileSync(`./data/${provider}.json`, {encoding:'utf8', flag:'r'});
     
-    res.json(JSON.parse(data));
 });
 
 router.get('/gas/all', function(req,res) {
