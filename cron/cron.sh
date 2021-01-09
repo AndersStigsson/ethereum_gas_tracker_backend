@@ -7,9 +7,9 @@ getgasavg=./cron/average1m.sh
 providers=$(jq -r 'keys[]' $config)
 
 for provider in $providers
-  do
-    $getgas $config $provider > data/$provider.json &
-  done
+    do
+        $getgas $config $provider > data/$provider.json &
+    done
 
 # wait 5 seconds for all providers to respond
 sleep 5
