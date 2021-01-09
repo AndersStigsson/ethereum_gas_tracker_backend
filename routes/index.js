@@ -23,7 +23,7 @@ var defaultMessaging = admin.messaging();
 router.get('/providers', function(req, res) {
     const data = fs.readFileSync('./config/providers.json', {encoding:'utf8', flag:'r'});
     const providerList = JSON.parse(data);
-    res.json({providers: [Object.keys(providerList)]});
+    res.json({providers: Object.keys(providerList)});
 });
 
 router.get('/', function(req, res) {
