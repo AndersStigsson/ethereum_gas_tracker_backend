@@ -11,7 +11,7 @@ if [[ -z $providers ]] || [[ -z $provider ]]
 fi
 
 # check if required packages installed (jo,jq,bc)
-if [[ "$(which jo)" == "" ]] || [[ "$(which jq)" == "" ]] || [[ "$(which bc)" == "" ]]
+if [[ "$(which jo)" == "" ]] || [[ "$(which jq)" == "" ]] || [[ "$(which bc)" == "" ]] || [[ "$(which curl)" == "" ]]
   then
     echo '{"error": "missing required packages"}'
     exit 1
