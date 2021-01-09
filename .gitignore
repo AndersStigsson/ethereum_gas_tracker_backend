@@ -1,6 +1,6 @@
 ethereum-gas-tracker-firebase-adminsdk-pymqa-e509f48404.json
 data
-providers_apikeys.json
+config/providers_apikey.json
 
 # Logs
 logs
