@@ -11,4 +11,6 @@ for provider in $providers
     $getgas $config $provider > data/$provider.json &
   done
 
+# wait 5 seconds for all providers to respond
+sleep 5
 $getgasavg $config > data/average1m.json &
