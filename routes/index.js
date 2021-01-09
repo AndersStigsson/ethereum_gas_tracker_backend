@@ -35,13 +35,13 @@ router.get('/gas/avg', function(req,res){
 });
 
 router.get('/gas/avg/1m', function(req, res){
-    const data = fs.readFileSync('./average1m.json', {encoding:'utf8', flag:'r'});
+    const data = fs.readFileSync('./data/average1m.json', {encoding:'utf8', flag:'r'});
     const average = JSON.parse(data);
     res.json(average);
 });
 
 router.get('/gas/avg/1h', function(req, res){
-    const data = fs.readFileSync('./average1h.json', {encoding:'utf8', flag:'r'});
+    const data = fs.readFileSync('./data/average1h.json', {encoding:'utf8', flag:'r'});
     const average = JSON.parse(data);
     res.json(average);
 });
