@@ -12,14 +12,7 @@ var defaultMessaging = admin.messaging();
 //const fetch = require('node-fetch');
 
 
-
-
 /* GET home page. */
-// router.get('/providers', function(req, res) {
-//     const data = fs.readFileSync('./providers.json', {encoding:'utf8', flag:'r'});
-//     const providers = JSON.parse(data);
-//     res.json(providers);
-// });
 router.get('/providers', function(req, res) {
     const data = fs.readFileSync('./config/providers.json', {encoding:'utf8', flag:'r'});
     const providerList = JSON.parse(data);
