@@ -1,0 +1,79 @@
+{
+    "etherscan":
+    {
+        "name": "etherscan",
+        "url": "https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=",
+        "apikey": true,
+        "slow": "result.SafeGasPrice",
+        "medium": "result.ProposeGasPrice",
+        "fast": "result.FastGasPrice",
+        "instant": "N/A",
+        "divider": 1
+    },
+    "ethgasstation":
+    {
+        "name": "ethgasstation",
+        "url": "https://ethgasstation.info/api/ethgasAPI.json?",
+        "apikey": false,
+        "slow": "safeLow",
+        "medium": "average",
+        "fast": "fast",
+        "instant": "fastest",
+        "divider": 10
+    },
+    "etherchain":
+    {
+        "name": "etherchain",
+        "url": "https://etherchain.org/api/gasPriceOracle",
+        "apikey": false,
+        "slow": "safeLow",
+        "medium": "standard",
+        "fast": "fast",
+        "instant": "fastest",
+        "divider": 1
+    },
+    "upvest":
+    {
+        "name": "upvest",
+        "url": "https://fees.upvest.co/estimate_eth_fees",
+        "apikey": false,
+        "slow": "estimates.slow",
+        "medium": "estimates.medium",
+        "fast": "estimates.fast",
+        "instant": "estimates.fastest",
+        "divider": 1
+    },
+    "poa":
+    {
+        "name": "poa",
+        "url": "https://gasprice.poa.network/",
+        "apikey": false,
+        "slow": "slow",
+        "medium": "standard",
+        "fast": "fast",
+        "instant": "instant",
+        "divider": 1
+    },
+    "mycrypto":
+    {
+        "name": "mycrypto",
+        "url": "https://gas.mycryptoapi.com/",
+        "apikey": false,
+        "slow": "safeLow",
+        "medium": "standard",
+        "fast": "fast",
+        "instant": "fastest",
+        "divider": 1
+    },
+    "gasnow":
+    {
+        "name": "gasnow",
+        "url": "https://www.gasnow.org/api/v3/gas/price",
+        "apikey": false,
+        "slow": "data.slow",
+        "medium": "data.standard",
+        "fast": "data.fast",
+        "instant": "data.rapid",
+        "divider": 1000000000
+    }
+}
