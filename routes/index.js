@@ -52,7 +52,7 @@ router.get('/gas/:provider', function(req, res) {
     var providerJSON = JSON.parse(providers); 
 
     if(providerJSON[provider] === undefined) {
-      res.json({error: "Provider does not exist or has not been implemented yet"});
+      res.json({error: "The provider you look for does not exist or has not been implemented yet"});
     } else {
       var data = fs.readFileSync(`./data/${provider}.json`, {encoding:'utf8', flag:'r'});
       data = JSON.parse(data);
@@ -60,10 +60,6 @@ router.get('/gas/:provider', function(req, res) {
     }
     
     
-});
-
-router.get('/gas/all', function(req,res) {
-
 });
 
 router.get('/message/send', function(req, res) {
