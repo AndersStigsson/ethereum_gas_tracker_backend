@@ -35,23 +35,23 @@ router.get('/gas/avg', function(req,res){
 });
 
 router.get('/gas/avg/1m', function(req, res){
-    const data = fs.readFileSync('./average1m.json', {encoding:'utf8', flag:'r'});
+    const data = fs.readFileSync('./data/average1m.json', {encoding:'utf8', flag:'r'});
     const average = JSON.parse(data);
     res.json(average);
 });
 
 router.get('/gas/avg/1h', function(req, res){
-    const data = fs.readFileSync('./average1h.json', {encoding:'utf8', flag:'r'});
+    const data = fs.readFileSync('./data/average1h.json', {encoding:'utf8', flag:'r'});
     const average = JSON.parse(data);
     res.json(average);
 });
 
 router.get('/gas:provider', function(req, res) {
     const provider = req.params.provider;
-    const data = fs.readFileSync('./providerInfo.json', {encoding:'utf8', flag:'r'});
-    const url = JSON.parse(data.provider);
+    const data = fs.readFileSync('./config/providers.json', {encoding:'utf8', flag:'r'});
+    const url = JSON.parse(data.provider.url);
     //make fetch call to url to get real time value from provider.
-    res.json(providers);
+    res.text(url);
 });
 
 router.get('/gas/all', function(req,res) {
