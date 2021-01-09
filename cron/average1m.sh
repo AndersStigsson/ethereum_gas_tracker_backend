@@ -1,6 +1,6 @@
 #!/bin/bash
 
-config=config/providers.json
+config=$1
 providers=$(jq -r 'keys[]' $config)
 
 # check if config file exists
