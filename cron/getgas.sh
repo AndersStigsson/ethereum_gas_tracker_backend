@@ -21,7 +21,7 @@ fi
 # check if provider exists
 if [[ "$(jq -r ". | .$provider? | .name " $providers)" != "$provider" ]]
     then
-        jo error="provider does not exists" | jq --slurp 'reduce .[] as $item ({}; . * $item)'
+        jo error="provider does not exists"
         exit 1
 fi
 
@@ -40,7 +40,7 @@ if [[ $apiKey == true ]]
     then
         if [[ ! -a $apikeylist ]]
             then
-                jo error="sorry apikey not found" | jq --slurp 'reduce .[] as $item ({}; . * $item)'
+                jo error="sorry apikey not found"
                 exit 1
         fi
         apiKey=$(jq -r ".$apiName" $apikeylist)
