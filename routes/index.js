@@ -51,8 +51,6 @@ router.get('/gas/:provider', function(req, res) {
       data = JSON.parse(data);
       res.json(data);
     }
-    
-    
 });
 
 router.get('/message/send', function(req, res) {
