@@ -48,10 +48,14 @@ router.get('/gas/avg/1h', function(req, res){
 
 router.get('/gas:provider', function(req, res) {
     const provider = req.params.provider;
-    const data = fs.readFileSync('./providerInfo.json', {encoding:'utf8', flag:'r'});
-    const url = JSON.parse(data.provider);
-    //make fetch call to url to get real time value from provider.
-    res.json(providers);
+    const providers = JSON.parse(fs.readFileSync('./config/providers.json', {encoding:'utf8', flag:'r'}));
+    if(providers.provider === undefined) {
+      res.json({error: "Provider does not exist or has not been implemented yet"});
+    }
+    
+    const data = fs.readFileSync(`./data/${provider}.json`, {encoding:'utf8', flag:'r'});
+    
+    res.json(JSON.parse(data));
 });
 
 router.get('/gas/all', function(req,res) {
