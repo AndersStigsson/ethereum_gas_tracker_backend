@@ -6,7 +6,7 @@ const fetch = require('node-fetch');
 
 var admin = require("firebase-admin");
 admin.initializeApp({
-  credential: admin.credential.applicationDefault(),
+    credential: admin.credential.applicationDefault(),
 });
 var defaultMessaging = admin.messaging();
 //const fetch = require('node-fetch');
@@ -45,11 +45,11 @@ router.get('/gas/:provider', function(req, res) {
     var providerJSON = JSON.parse(providers); 
 
     if(providerJSON[provider] === undefined) {
-      res.json({error: "The provider you look for does not exist or has not been implemented yet"});
+        res.json({error: "The provider you look for does not exist or has not been implemented yet"});
     } else {
-      var data = fs.readFileSync(`./data/${provider}.json`, {encoding:'utf8', flag:'r'});
-      data = JSON.parse(data);
-      res.json(data);
+        var data = fs.readFileSync(`./data/${provider}.json`, {encoding:'utf8', flag:'r'});
+        data = JSON.parse(data);
+        res.json(data);
     }
 });
 
@@ -58,26 +58,24 @@ router.get('/message/send', function(req, res) {
     //ethereum-gas-tracker
     console.log(req.query);
     var message = {
-      notification: {
-        title: 'Cheap gas fees!',
-        body: `The gas fees are currently ${gasPrice} gwei`
-      },
-      topic: "ethereum_gas"
+        notification: {
+            title: 'Cheap gas fees!',
+            body: `The gas fees are currently ${gasPrice} gwei`
+        },
+        topic: "ethereum_gas"
     };
     console.log(message);
     // Send a message to the device corresponding to the provided
     // registration token.
     defaultMessaging.send(message)
-      .then((response) => {
-        // Response is a message ID string.
-        console.log('Successfully sent message:', response);
-      })
-      .catch((error) => {
-        console.log('Error sending message:', error);
-      });
-    
+        .then((response) => {
+            // Response is a message ID string.
+           console.log('Successfully sent message:', response);
+        })
+        .catch((error) => {
+            console.log('Error sending message:', error);
+        });
     res.json({state: "OK"});
 });
-
 
 module.exports = router;
