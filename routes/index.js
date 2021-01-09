@@ -46,7 +46,7 @@ router.get('/gas/avg/1h', function(req, res){
     res.json(average);
 });
 
-router.get('/gas:provider', function(req, res) {
+router.get('/gas/:provider', function(req, res) {
     const provider = req.params.provider;
     const providers = JSON.parse(fs.readFileSync('./config/providers.json', {encoding:'utf8', flag:'r'}));
     if(providers.provider === undefined) {
