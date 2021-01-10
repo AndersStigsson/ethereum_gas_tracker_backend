@@ -33,7 +33,7 @@ for level in $levels
     do
         datalist=$(jq -r ".unified.$level" $providerfiles | grep -Ev '^0')
         divider=$(wc -l <<< $datalist)
-        $level=$(awk '{s+=$1}END{print int(s/'$divider')}' <<< $datalist)
+        declare $level=$(awk '{s+=$1}END{print int(s/'$divider')}' <<< $datalist)
     done
 
 # generate parsed json
