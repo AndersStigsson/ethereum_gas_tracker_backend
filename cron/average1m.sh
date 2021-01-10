@@ -1,7 +1,12 @@
 #!/bin/bash
-
 config=$1
-providers=$(jq -r 'keys[]' $config)
+
+# check if config parameter is set
+if [[ "$config" == "" ]]
+  then
+    echo '{"error": "missing config parameter"}'
+    exit 1
+fi
 
 # check if config file exists
 if [[ ! -a $config ]]
@@ -9,6 +14,8 @@ if [[ ! -a $config ]]
     echo '{"error": "missing config file"}'
     exit 1
 fi
+
+providers=$(jq -r 'keys[]' $config)
 
 # check if required packages installed (jo,jq,bc)
 if [[ "$(which jo)" == "" ]] || [[ "$(which jq)" == "" ]] || [[ "$(which bc)" == "" ]] || [[ "$(which curl)" == "" ]]
@@ -61,5 +68,6 @@ average=$(jo -p \
     instant=$instant\
 )
 
-# return raw+parsed data
+# return average data
+echo $average >> data/average1m.log
 echo '{"timestamp": '$timestamp'}' '{"average": '$average'}' | jq --slurp 'reduce .[] as $item ({}; . * $item)'

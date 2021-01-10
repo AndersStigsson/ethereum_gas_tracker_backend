@@ -1,5 +1,4 @@
 #!/bin/bash
-
 cd /ethereum_gas_tracker_backend
 config=config/providers.json
 getgas=./cron/getgas.sh

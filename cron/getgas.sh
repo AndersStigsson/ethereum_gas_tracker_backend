@@ -1,5 +1,4 @@
 #!/bin/bash
-
 providers=$1
 provider=$2
 apikeylist=config/providers_apikey.json
