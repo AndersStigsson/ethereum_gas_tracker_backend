@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# check if config file exists
+# check if log file exists
 if [[ ! -a data/average1m.log ]]
   then
     echo '{"error": "missing average log file"}'
@@ -8,7 +8,7 @@ if [[ ! -a data/average1m.log ]]
 fi
 
 # check if required packages installed (jo,jq,bc)
-if [[ "$(which jo)" == "" ]] || [[ "$(which jq)" == "" ]] || [[ "$(which bc)" == "" ]] || [[ "$(which curl)" == "" ]]
+if [[ "$(which jo)" == "" ]] || [[ "$(which jq)" == "" ]]
   then
     echo '{"error": "missing required packages"}'
     exit 1
