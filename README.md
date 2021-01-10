@@ -1,8 +1,9 @@
 # ethereum_gas_tracker_backend
 ## setup
+```bash
 apt -y install nodejs npm jo jq curl bc bash
 git clone $repo
-cd /ethereum_gas_tracker_backend
+cd ethereum_gas_tracker_backend
 mkdir data
 npm install
 crontab -l > /tmp/crontab
@@ -11,6 +12,7 @@ crontab /tmp/crontab
 rm /tmp/crontab
 export GOOGLE_APPLICATION_CREDENTIALS="/path/to/firebase-key.json"
 npm start
+```
 
 ## apikeys
 add apikeys to $(pwd)/config/provides_apikey.json
