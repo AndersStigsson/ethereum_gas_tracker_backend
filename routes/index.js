@@ -27,7 +27,7 @@ router.get('/providers', function(req, res) {
 });
 
 router.get('/', function(req, res) {
-    res.text("Backend works");
+    res.send("Backend works");
 });
 
 router.get('/gas/avg', function(req,res){
