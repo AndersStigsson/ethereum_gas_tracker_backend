@@ -13,32 +13,39 @@ var defaultMessaging = admin.messaging();
 
 
 /* GET home page. */
+router.get('/', function(req, res) {
+    res.send("Backend works");
+});
+
+// list of providers
 router.get('/providers', function(req, res) {
     const data = fs.readFileSync('./config/providers.json', {encoding:'utf8', flag:'r'});
     const providerList = JSON.parse(data);
     res.json({providers: Object.keys(providerList)});
 });
 
-router.get('/', function(req, res) {
-    res.send("Backend works");
-});
-
+// average of all providers from current data
 router.get('/gas/avg', function(req,res){
-	
+    const data = fs.readFileSync('./data/average.json', {encoding:'utf8', flag:'r'});
+    const average = JSON.parse(data);
+    res.json(average);
 });
 
+// average of all providers latest crontab, fetched every minute
 router.get('/gas/avg/1m', function(req, res){
     const data = fs.readFileSync('./data/average1m.json', {encoding:'utf8', flag:'r'});
     const average = JSON.parse(data);
     res.json(average);
 });
 
+// average of last 60 minutes (60 snapshots, one for each minute)
 router.get('/gas/avg/1h', function(req, res){
     const data = fs.readFileSync('./data/average1h.json', {encoding:'utf8', flag:'r'});
     const average = JSON.parse(data);
     res.json(average);
 });
 
+// current data from provider
 router.get('/gas/:provider', function(req, res) {
     const provider = req.params.provider;
     const providers = fs.readFileSync('./config/providers.json', {encoding:'utf8', flag:'r'});
