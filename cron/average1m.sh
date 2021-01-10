@@ -69,5 +69,5 @@ average=$(jo -p \
 )
 
 # return average data
-echo $average >> data/average1m.log
+echo $slow $medium $fast $instant >> data/average1m.log
 echo '{"timestamp": '$timestamp'}' '{"average": '$average'}' | jq --slurp 'reduce .[] as $item ({}; . * $item)'
