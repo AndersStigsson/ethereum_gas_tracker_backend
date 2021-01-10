@@ -77,7 +77,7 @@ router.get('/message/send', function(req, res) {
     defaultMessaging.send(message)
         .then((response) => {
             // Response is a message ID string.
-           console.log('Successfully sent message:', response);
+            console.log('Successfully sent message:', response);
         })
         .catch((error) => {
             console.log('Error sending message:', error);
