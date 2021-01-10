@@ -25,43 +25,19 @@ if [[ "$(which jo)" == "" ]] || [[ "$(which jq)" == "" ]] || [[ "$(which bc)" ==
 fi
 
 # calculate average
-i=1
-count=0
-slow=0
-medium=0
-fast=0
-instant=0
 timestamp=$(date +%s)
-
-for provider in $providers
+providerfiles=$(sed 's/^\(.*\)/data\/\1.json/g' <<< $providers | tr '\n' ' ' )
+levels="slow medium fast instant"
+IFS=" "
+for level in $levels
     do
-        data=$(jq '.unified' data/$provider.json)
-        if [[ $provider == $(jq -r '.name' <<< $data) ]]
-            then
-                jTimestamp=$(jq -r '.timestamp' <<< $data)
-                timediff=$(($timestamp - $jTimestamp))
-                if [[ ! $timediff > 70 ]]
-                    then
-                        jSlow=$(jq -r '.slow' <<< $data)
-                        slow=$(echo "($slow + $jSlow)/$i" | bc -q)
-                        jMedium=$(jq -r '.medium' <<< $data)
-                        medium=$(echo "($medium + $jMedium)/$i" | bc -q)
-                        jFast=$(jq -r '.fast' <<< $data)
-                        fast=$(echo "($fast + $jFast)/$i" | bc -q)
-                        jInstant=$(jq -r '.instant' <<< $data)
-                        if [[ $jInstant > 0 ]]
-                            then
-                                instant=$(echo "($instant + $jInstant)/$i" | bc -q)
-                        fi
-                        i=2
-                        ((count+=1))
-                fi
-        fi
+        datalist=$(jq -r ".unified.$level" $providerfiles | grep -Ev '^0')
+        divider=$(wc -l <<< $datalist)
+        $level=$(awk '{s+=$1}END{print int(s/'$divider')}' <<< $datalist)
     done
 
 # generate parsed json
 average=$(jo -p \
-    count=$count\
     slow=$slow\
     medium=$medium\
     fast=$fast\
